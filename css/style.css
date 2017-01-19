@@ -114,6 +114,10 @@ ol {
 ul {
   list-style: none;
 }
+.article-entry p,
+.article-entry h3 {
+  text-indent: 2em;
+}
 input,
 button {
   margin: 0;

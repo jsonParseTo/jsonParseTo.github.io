@@ -9,6 +9,11 @@
  *          options.errCallBack {Function} 可为空.提供img加载失败回调，供业务额外去处理加载失败逻辑
  *          options.container {Dom} 提供容器节点内可视区域的加载能力，默认为window
  */
+$('p:contains("ooNoIndent00"), h3:contains("ooNoIndent00")').each(function() {
+    var text = $(this).html();
+    $(this).css('text-indent', '0em');
+    $(this).html(text.replace('ooNoIndent00', '')); 
+});
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
