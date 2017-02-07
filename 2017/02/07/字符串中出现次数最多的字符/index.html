@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>setTimeout和setInterval那些事儿 | 张文宝的博客空间</title>
+  <title>字符串中出现次数最多的字符 | 张文宝的博客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="setTimeout有一个最小执行时间，当指定的时间小于该时间时，浏览器会用最小允许的时间作为setTimeout的时间间隔，也就是说即使我们把setTimeout的毫秒数设置为0，被调用的程序也没有马上启动">
+  <meta name="description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
 <meta property="og:type" content="article">
-<meta property="og:title" content="setTimeout和setInterval那些事儿">
-<meta property="og:url" content="http://zhangwenbao.top/2017/01/23/setTimeout和setInterval那些事儿/index.html">
+<meta property="og:title" content="字符串中出现次数最多的字符">
+<meta property="og:url" content="http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/index.html">
 <meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="setTimeout有一个最小执行时间，当指定的时间小于该时间时，浏览器会用最小允许的时间作为setTimeout的时间间隔，也就是说即使我们把setTimeout的毫秒数设置为0，被调用的程序也没有马上启动">
-<meta property="og:updated_time" content="2017-02-03T00:53:15.425Z">
+<meta property="og:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+<meta property="og:updated_time" content="2017-02-07T12:00:48.460Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="setTimeout和setInterval那些事儿">
-<meta name="twitter:description" content="setTimeout有一个最小执行时间，当指定的时间小于该时间时，浏览器会用最小允许的时间作为setTimeout的时间间隔，也就是说即使我们把setTimeout的毫秒数设置为0，被调用的程序也没有马上启动">
+<meta name="twitter:title" content="字符串中出现次数最多的字符">
+<meta name="twitter:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
   
   
     <link rel="icon" href="/img/v.jpg">
@@ -179,11 +179,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-setTimeout和setInterval那些事儿" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-字符串中出现次数最多的字符" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/23/setTimeout和setInterval那些事儿/" class="article-date">
-      <time datetime="2017-01-23T05:37:06.895Z" itemprop="datePublished">2017-01-23</time>
+      <a href="/2017/02/07/字符串中出现次数最多的字符/" class="article-date">
+      <time datetime="2017-02-07T06:12:47.896Z" itemprop="datePublished">2017-02-07</time>
 </a>
     </div>
   
@@ -196,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      setTimeout和setInterval那些事儿
+      字符串中出现次数最多的字符
     </h1>
   
 
@@ -217,16 +217,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>setTimeout（执行一次） 和 setInterval（反复执行）函数经常被用来做网页上的定时器，允许为它指定一个毫秒数作为间隔执行的时间。当被启动的程序需要在非常短的时间内运行，我们就会给她指定一个很小的时间数，或者需要马上执行的话，我们甚至把这个毫秒数设置为0，但事实上，setTimeout有一个最小执行时间，当指定的时间小于该时间时，浏览器会用最小允许的时间作为setTimeout的时间间隔，也就是说即使我们把setTimeout的毫秒数设置为0，被调用的程序也没有马上启动。 </p>
-<p>这个最小的时间间隔是多少呢？这和浏览器及操作系统有关。在John Resig的新书《Javascript忍者的秘密》一书中提到  Browsers all have a 10ms minimum delay on OSX and a(approximately) 15ms delay on Windows.（在苹果上的最小时间间隔是10毫秒，在Windows系统上的最小时间间隔大约是15毫秒） </p>
-<p>另外，MDN中关于setTimeout的介绍中也提到，Firefox中定义的最小时间间隔（DOM_MIN_TIMEOUT_VALUE）是10毫秒，HTML5定义的最小时间间隔是4毫秒。既然规范都是这样写的，那看来使用setTimeout是没办法再把这个最小时间间隔缩短了。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">"lx"</span>);          </div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"lxbb"</span>);</div><div class="line">&#125;, <span class="number">0</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"bb"</span>);  </div><div class="line"><span class="comment">//打印结果依次是 lx, bb, lxbb</span></div></pre></td></tr></table></figure>
-<p>setTimeout的第一个参数是执行的函数，第二个参数是延迟的时间，后续的参数可以传递给第一个执行的函数作为参数使用（需要注意的是，IE9 及更早的 IE 浏览器不支持这种向延迟函数传递额外参数的功能），比如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">args</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i&lt; len; i++ )&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">setTimeout( args, <span class="number">1000</span>, <span class="string">"lx"</span>, <span class="string">"bb"</span>, <span class="string">"lxbb"</span> );</div><div class="line"><span class="comment">//依次打印 lx, bb, lxbb</span></div></pre></td></tr></table></figure>
-<p>有时需要向延迟执行函数中传递参数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n, t, s </span>)</span>&#123;</div><div class="line">    <span class="comment">//code </span></div><div class="line">&#125;</div><div class="line"><span class="comment">//使用匿名函数(推荐)</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    fn(<span class="string">"args1"</span>, <span class="string">"args2"</span>, <span class="string">"args3"</span>);</div><div class="line">&#125;, <span class="number">1000</span>);	</div><div class="line"><span class="comment">// 绝对不要使用字符串作为第一个参数</span></div><div class="line"><span class="comment">// 因为它的本质是调用了eval()函数</span></div><div class="line">setTimeout(<span class="string">"fn('args1', 'args2', 'args3')"</span>, <span class="number">1000</span>);</div><div class="line"><span class="comment">//等价于如下代码</span></div><div class="line">setTimeout(<span class="built_in">eval</span>( <span class="string">"fn('args1', 'args2', 'args3')"</span> ), <span class="number">1000</span>);</div></pre></td></tr></table></figure>
-<p>由于javascript是基于<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop" target="_blank" rel="external">Event Loop</a>机制的单线程模型的语言，基于JavaScript引擎的计时策略，以及本质上的单线程运行方式，所以其它代码的运行可能会阻塞此线程。因此没法确保函数会在 setTimeout 指定的时刻被调用。上述代码在执行console.log(“lx”)的时候会直接打印lx，然后遇到setTimeout函数时将其callback添加到事件队列中并在设定的延迟时间后执行（如果此时的线程是空闲的话）。所以接下来会执行console.log(“bb”)打印出bb，最后打印的值是lxbb。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"lx"</span>);</div><div class="line">	&#125;, <span class="number">900</span>);</div><div class="line">&#125;,<span class="number">0</span>);</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"bb"</span>);</div><div class="line">&#125;,<span class="number">1000</span>);    <span class="comment">//这段代码的执行结果很奇怪,有时打印 lx, bb  有时打印  bb, lx</span></div></pre></td></tr></table></figure>
+        <p>最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符。咋一看，也是很简单的啊，于是写出如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.prototype.appearMaxTimes = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        index = <span class="literal">null</span>,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++ )&#123;</div><div class="line">        num[<span class="keyword">this</span>.charAt(i)] ? ++num[<span class="keyword">this</span>.charAt(i)] : num[<span class="keyword">this</span>.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            maxNum = num[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">index</span>: index,</div><div class="line">        <span class="attr">maxNum</span>: maxNum</div><div class="line">    &#125;;</div><div class="line">&#125;;		</div><div class="line"><span class="keyword">var</span> str = <span class="string">"jaajfkakgakgbajdjvbd"</span>;</div><div class="line"><span class="built_in">console</span>.log( str.appearMaxTimes() );  <span class="comment">// 打印结果为  &#123;index: "a", maxNum: 5&#125;</span></div></pre></td></tr></table></figure>
+<p>但是这样会有一些问题：</p>
+<ul>
+<li>判断的内容不是字符串呢？</li>
+<li>字符串是空的呢？</li>
+<li>出现最多的字符如果不止一个呢？</li>
+</ul>
+<p>当然如果判断的内容一定是非空字符串，而且出现最多的字符只会有一个，那固然很好，但是我们在学习阶段，还是要多思考研究一下。</p>
+<p>如果判断的内容不是字符串，那么会报错appearMaxTimes is not a funciton , 我们的方法是挂载在原型上面的，由于不能确定是否为字符串，应该修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        num = &#123;&#125;,</div><div class="line">        resultNum = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] &gt; maxNum ? maxNum = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] === maxNum ? resultNum[i] = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure></p>
+<p>总算是写完了，但是在判断出现最多次数字符的时候有多个for循环，这样是否影响效率呢，有没有其它的写法呢？思考许久，写得如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        resultNum = &#123;&#125;,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            maxNum = num[i];</div><div class="line">            resultNum = &#123;&#125;;</div><div class="line">            resultNum[i] = num[i];</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num[i] === maxNum)&#123;</div><div class="line">            resultNum[i] = num[i];</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure>
+<p>总结：纵使前端框架如此之多，也一定要多学习原生javascript，其重要性不必多言。love coding love you。</p>
+
       
     </div>
     
@@ -234,13 +238,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/01/23/setTimeout和setInterval那些事儿/">setTimeout和setInterval那些事儿</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/07/字符串中出现次数最多的字符/">字符串中出现次数最多的字符</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Z-笔墨纸砚-先生 的个人博客">Z-笔墨纸砚-先生</a></p>
-        <p><span>发布时间:</span>2017年01月23日 - 13时37分</p>
-        <p><span>最后更新:</span>2017年02月03日 - 08时53分</p>
+        <p><span>发布时间:</span>2017年02月07日 - 14时12分</p>
+        <p><span>最后更新:</span>2017年02月07日 - 20时00分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/01/23/setTimeout和setInterval那些事儿/" title="setTimeout和setInterval那些事儿">http://zhangwenbao.top/2017/01/23/setTimeout和setInterval那些事儿/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/01/23/setTimeout和setInterval那些事儿/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/07/字符串中出现次数最多的字符/" title="字符串中出现次数最多的字符">http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -253,18 +257,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/07/字符串中出现次数最多的字符/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          字符串中出现次数最多的字符
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/19/微信限制访问外链或者跳转的问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">IOS从微信跳转到APP Store的困扰</div>
+    <a href="/2017/01/23/setTimeout和setInterval那些事儿/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">setTimeout和setInterval那些事儿</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -342,13 +337,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/07/字符串中出现次数最多的字符/" title="上一篇: 字符串中出现次数最多的字符">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/01/19/微信限制访问外链或者跳转的问题/" title="下一篇: IOS从微信跳转到APP Store的困扰">
+            <a href="/2017/01/23/setTimeout和setInterval那些事儿/" title="下一篇: setTimeout和setInterval那些事儿">
                 <i class="fa fa-angle-right"></i>
             </a>
         

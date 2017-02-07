@@ -13,7 +13,7 @@
 <meta property="og:description" content="微信开发中总会遇到一些限制，今天遇到了android无法下载apk包以及iphone无法跳转到APP Store的问题">
 <meta property="og:image" content="http://zhangwenbao.top/img/2017/1/android.png">
 <meta property="og:image" content="http://zhangwenbao.top/img/2017/1/ios.png">
-<meta property="og:updated_time" content="2017-01-23T09:28:10.611Z">
+<meta property="og:updated_time" content="2017-02-07T06:12:31.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IOS从微信跳转到APP Store的困扰">
 <meta name="twitter:description" content="微信开发中总会遇到一些限制，今天遇到了android无法下载apk包以及iphone无法跳转到APP Store的问题">
@@ -79,11 +79,6 @@
                             <div class="ribbon"></div>
                         </div>
                         
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
                         
                         <div class="icon-wrap icon-me hide" data-idx="3">
                             <div class="user"></div>
@@ -98,8 +93,6 @@
                     <ul class="tips-inner">
                         <li>菜单</li>
                         <li>标签</li>
-                        
-                        <li>友情链接</li>
                         
                         
                         <li>关于我</li>
@@ -133,24 +126,16 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a>
+                        <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a>
                     </div>
                 </section>
                 
                 
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zjmainstay.cn/">PHP大神</a>
-                    
-                    </div>
-                </section>
                 
 
                 
                 
-                <section class="switch-part switch-part4">
+                <section class="switch-part switch-part3">
                 
                     <div id="js-aboutme">love coding love you</div>
                 </section>
@@ -248,9 +233,11 @@
 <p>2.将ios下载地址绑定在腾讯应用宝中</p>
 <p><a href="http://op.open.qq.com/" target="_blank" rel="external">登录腾讯开放平台</a> 账号密码找android开发人员，点击安卓应用-&gt;已上线-&gt;运营服务-&gt;微下载  看到界面如下 （packname后面的参数就是上面android的包名），然后找ios开发人员获取APP的下载地址，填写在ios地址栏中，提交后大约需要两天左右的时间审核，审核通过后即可。</p>
 <p><img src="/img/2017/1/ios.png">ooNoIndent00</p>
-<p>于我而言，后台会将访问设备的UA发送给我，所以我写的php模板代码如下，访问时会根据设备显示下面其中的一个a(用过模板引擎的朋友应该都知道吧)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="keyword">switch</span> name=<span class="string">"$data.os"</span>&#125;</div><div class="line">	&#123;<span class="keyword">case</span> value=<span class="string">"android"</span>&#125;</div><div class="line">		&lt;a id=<span class="string">"down"</span> href=<span class="string">"http://172.16.63.5/uploads/upgrade_package/1/test.apk"</span>&gt;下载APP&lt;/a&gt;</div><div class="line">	&#123;/<span class="keyword">case</span>&#125;</div><div class="line">	&#123;<span class="keyword">case</span> value=<span class="string">"ios"</span>&#125;</div><div class="line">		&lt;a id=<span class="string">"down"</span> href=<span class="string">"https://itunes.apple.com/cn/app/proflight/id1051197380"</span>&gt;下载APP&lt;/a&gt;</div><div class="line">	&#123;/<span class="keyword">case</span>&#125;</div><div class="line">&#123;/<span class="keyword">switch</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>于我而言，后台会将访问设备的UA发送给我，所以我写的php模板代码如下，访问时会根据设备显示下面其中的一个a(用过模板引擎的朋友应该都知道吧)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="keyword">switch</span> name=<span class="string">"$data.os"</span>&#125;</div><div class="line">    &#123;<span class="keyword">case</span> value=<span class="string">"android"</span>&#125;</div><div class="line">        &lt;a id=<span class="string">"down"</span> href=<span class="string">"http://172.16.63.5/uploads/upgrade_package/1/test.apk"</span>&gt;下载APP&lt;/a&gt;</div><div class="line">    &#123;/<span class="keyword">case</span>&#125;</div><div class="line">    &#123;<span class="keyword">case</span> value=<span class="string">"ios"</span>&#125;</div><div class="line">        &lt;a id=<span class="string">"down"</span> href=<span class="string">"https://itunes.apple.com/cn/app/proflight/id1051197380"</span>&gt;下载APP&lt;/a&gt;</div><div class="line">    &#123;/<span class="keyword">case</span>&#125;</div><div class="line">&#123;/<span class="keyword">switch</span>&#125;</div></pre></td></tr></table></figure></p>
 <p>然后在js中加入如下代码，如果是在微信中打开，该代码将会执行，上面的URL就会被修改</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'WeixinJSBridgeReady'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"down"</span>).setAttribute(<span class="string">"href"</span>,<span class="string">"http://a.app.qq.com/o/simple.jsp?pkgname=com.guide.uav"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'WeixinJSBridgeReady'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"down"</span>).setAttribute(<span class="string">"href"</span>,<span class="string">"http://a.app.qq.com/o/simple.jsp?pkgname=com.guide.uav"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>后来在测试的过程中发现上述代码的一个问题，当该页面未加载完全便点击下载按钮的时候，在微信中并未执行上述代码，发现android和ios在微信中访问时，UA都有共同的内容micromessager,而在浏览器下访问时UA并无此标识，所以将上述代码改为如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    /micromessenger/i.test(navigator.userAgent)?<span class="built_in">document</span>.getElementById(<span class="string">"down"</span>).setAttribute(<span class="string">"href"</span>,<span class="string">"http://a.app.qq.com/o/simple.jsp?pkgname=com.guide.uav"</span>):<span class="string">""</span>;</div><div class="line">&#125;());</div></pre></td></tr></table></figure>
 <p>这样在浏览器中访问时，android会直接下载apk包，ios会跳转到APP Store,而在微信中打开时，就是跳转到应用宝去。而且android的包名以及ios的app id是不会改变的，所以不要担心地址会失效，除非此app从腾讯应用宝下架。（还可以根据自己的需求定制自定义的页面，此处不再赘述）</p>
 <p>总结：花了四五个小时google出上述问题的解决方法，写下此篇博客帮助更多遇到该问题的朋友。love coding love you 。</p>
 
@@ -264,7 +251,7 @@
         <p><span>本文标题:</span><a href="/2017/01/19/微信限制访问外链或者跳转的问题/">IOS从微信跳转到APP Store的困扰</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Z-笔墨纸砚-先生 的个人博客">Z-笔墨纸砚-先生</a></p>
         <p><span>发布时间:</span>2017年01月19日 - 14时22分</p>
-        <p><span>最后更新:</span>2017年01月23日 - 17时28分</p>
+        <p><span>最后更新:</span>2017年02月07日 - 14时12分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/01/19/微信限制访问外链或者跳转的问题/" title="IOS从微信跳转到APP Store的困扰">http://zhangwenbao.top/2017/01/19/微信限制访问外链或者跳转的问题/</a>
             <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/01/19/微信限制访问外链或者跳转的问题/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -373,7 +360,7 @@
             <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/setTimeout和setInterval那些事儿/">setTimeout和setInterval那些事儿</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/19/微信限制访问外链或者跳转的问题/">IOS从微信跳转到APP Store的困扰</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/07/字符串中出现次数最多的字符/">字符串中出现次数最多的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/23/setTimeout和setInterval那些事儿/">setTimeout和setInterval那些事儿</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/19/微信限制访问外链或者跳转的问题/">IOS从微信跳转到APP Store的困扰</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
