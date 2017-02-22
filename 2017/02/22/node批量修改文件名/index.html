@@ -3,18 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>字符串中出现次数最多的字符 | 张文宝的博客空间</title>
+  <title>nodejs批量修改文件名 | 张文宝的博客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+  <meta name="description" content="nodejs的主要优势有事件机制和异步IO模型，所以在异步操作文件的时候会有很大的优势，对于批量来修改文件名的话，node显然是比手工操作要方便很多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串中出现次数最多的字符">
-<meta property="og:url" content="http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/index.html">
+<meta property="og:title" content="nodejs批量修改文件名">
+<meta property="og:url" content="http://zhangwenbao.top/2017/02/22/node批量修改文件名/index.html">
 <meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
-<meta property="og:updated_time" content="2017-02-09T12:23:05.778Z">
+<meta property="og:description" content="nodejs的主要优势有事件机制和异步IO模型，所以在异步操作文件的时候会有很大的优势，对于批量来修改文件名的话，node显然是比手工操作要方便很多">
+<meta property="og:image" content="http://zhangwenbao.top/img/2017/2/cmd.png">
+<meta property="og:image" content="http://zhangwenbao.top/img/2017/2/old.png">
+<meta property="og:image" content="http://zhangwenbao.top/img/2017/2/new.png">
+<meta property="og:updated_time" content="2017-02-22T06:34:40.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串中出现次数最多的字符">
-<meta name="twitter:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+<meta name="twitter:title" content="nodejs批量修改文件名">
+<meta name="twitter:description" content="nodejs的主要优势有事件机制和异步IO模型，所以在异步操作文件的时候会有很大的优势，对于批量来修改文件名的话，node显然是比手工操作要方便很多">
+<meta name="twitter:image" content="http://zhangwenbao.top/img/2017/2/cmd.png">
   
   
     <link rel="icon" href="/img/v.jpg">
@@ -179,11 +183,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-字符串中出现次数最多的字符" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-node批量修改文件名" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/07/字符串中出现次数最多的字符/" class="article-date">
-      <time datetime="2017-02-07T06:12:47.896Z" itemprop="datePublished">2017-02-07</time>
+      <a href="/2017/02/22/node批量修改文件名/" class="article-date">
+      <time datetime="2017-02-22T03:50:50.747Z" itemprop="datePublished">2017-02-22</time>
 </a>
     </div>
   
@@ -196,7 +200,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      字符串中出现次数最多的字符
+      nodejs批量修改文件名
     </h1>
   
 
@@ -207,7 +211,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -217,19 +221,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符。咋一看，也是很简单的啊，于是写出如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.prototype.appearMaxTimes = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        index = <span class="literal">null</span>,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++ )&#123;</div><div class="line">        num[<span class="keyword">this</span>.charAt(i)] ? ++num[<span class="keyword">this</span>.charAt(i)] : num[<span class="keyword">this</span>.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            maxNum = num[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">index</span>: index,</div><div class="line">        <span class="attr">maxNum</span>: maxNum</div><div class="line">    &#125;;</div><div class="line">&#125;;		</div><div class="line"><span class="keyword">var</span> str = <span class="string">"jaajfkakgakgbajdjvbd"</span>;</div><div class="line"><span class="built_in">console</span>.log( str.appearMaxTimes() );  <span class="comment">// 打印结果为  &#123;index: "a", maxNum: 5&#125;</span></div></pre></td></tr></table></figure>
-<p>但是这样会有一些问题：</p>
+        <p>最近在学习nodejs的相关知识，nodejs的主要优势有事件机制和异步IO模型，所以在异步操作文件的时候会有很大的优势，对于批量来修改文件名的话，node显然是比手工操作要方便很多，于是研究了一下node的fs模块。比如我们现在要将img文件夹下的xxx.png修改为xxx.jpg。主要用到了readdir和rename两个方法：</p>
 <ul>
-<li>判断的内容不是字符串呢？</li>
-<li>字符串是空的呢？</li>
-<li>出现最多的字符如果不止一个呢？</li>
+<li>readdir: 用法如下 fs.readdir(path[,options],callback);<br>以异步的方式读取一个目录的内容,可选的options参数用于传入回调的文件名，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 encoding 属性指定使用的字符编码。 如果 encoding 设为 ‘buffer’，则返回的文件名会被作为 Buffer 对象传入。对应的同步方法是readdirSync。</li>
+<li>rename: 用法如下 fs.rename(oldPath,newPath,callback);<br>oldPath表示文件的原始路径，newPath表示修改之后的文件路径，callback只有一个可能的异常参数。</li>
 </ul>
-<p>当然如果判断的内容一定是非空字符串，而且出现最多的字符只会有一个，那固然很好，但是我们在学习阶段，还是要多思考研究一下。</p>
-<p>如果判断的内容不是字符串，那么会报错appearMaxTimes is not a funciton , 我们的方法是挂载在原型上面的，由于不能确定是否为字符串，应该修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        num = &#123;&#125;,</div><div class="line">        resultNum = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] &gt; maxNum ? maxNum = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] === maxNum ? resultNum[i] = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure></p>
-<p>总算是写完了，但是在判断出现最多次数字符的时候有多个for循环，这样是否影响效率呢，有没有其它的写法呢？思考许久，写得如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        resultNum = &#123;&#125;,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            resultNum = &#123;&#125;;</div><div class="line">            maxNum = resultNum[i] = num[i];</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num[i] === maxNum)&#123;</div><div class="line">            resultNum[i] = num[i];</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure>
-<p>总结：纵使前端框架如此之多，也一定要多学习原生javascript，其重要性不必多言。love coding love you。</p>
+<p>建立一个fs.js的文件，代码如下，在同级有一个img文件夹，里面放了一些xxx.png的照片。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</div><div class="line"><span class="keyword">const</span> PATH = <span class="string">"img"</span>;</div><div class="line">fs.readdir( PATH, ( err , files ) =&gt; &#123;</div><div class="line">    files.forEach(<span class="function">(<span class="params"> filename </span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">let</span> oldPath = PATH + <span class="string">'/'</span> + filename,</div><div class="line">        newPath = PATH + <span class="string">'/'</span> + filename.replace( <span class="regexp">/\.png/</span>, <span class="string">".jpg"</span> ); </div><div class="line">        fs.rename( oldPath, newPath, ( err ) =&gt; &#123;</div><div class="line">            err </div><div class="line">            ? <span class="built_in">console</span>.log( <span class="string">"将 "</span> + oldPath + <span class="string">" 修改为 "</span> + newPath ) </div><div class="line">            : <span class="built_in">console</span>.log(<span class="string">"修改"</span> +oldPath+ <span class="string">" 失败"</span>);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log( <span class="string">"start"</span> );</div></pre></td></tr></table></figure></p>
+<p>在命令行中运行node fs<br><img src="/img/2017/2/cmd.png">ooNoIndent00</p>
+<p>批量修改前<br><img src="/img/2017/2/old.png">ooNoIndent00</p>
+<p>批量修改后<br><img src="/img/2017/2/new.png">ooNoIndent00</p>
+<p>总结：作为一个前端开发人员，也有努力学习nodejs相关的知识，一点点的进步。love coding love you。</p>
 
       
     </div>
@@ -238,13 +239,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/07/字符串中出现次数最多的字符/">字符串中出现次数最多的字符</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/22/node批量修改文件名/">nodejs批量修改文件名</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Z-笔墨纸砚-先生 的个人博客">Z-笔墨纸砚-先生</a></p>
-        <p><span>发布时间:</span>2017年02月07日 - 14时12分</p>
-        <p><span>最后更新:</span>2017年02月09日 - 20时23分</p>
+        <p><span>发布时间:</span>2017年02月22日 - 11时50分</p>
+        <p><span>最后更新:</span>2017年02月22日 - 14时34分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/07/字符串中出现次数最多的字符/" title="字符串中出现次数最多的字符">http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/22/node批量修改文件名/" title="nodejs批量修改文件名">http://zhangwenbao.top/2017/02/22/node批量修改文件名/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/22/node批量修改文件名/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -257,18 +258,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/18/测试一下你的javascript底细--上/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          测试一下你的javascript底细--上
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/23/setTimeout和setInterval那些事儿/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">setTimeout和setInterval那些事儿</div>
+    <a href="/2017/02/18/测试一下你的javascript底细--上/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">测试一下你的javascript底细--上</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -346,13 +338,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/18/测试一下你的javascript底细--上/" title="上一篇: 测试一下你的javascript底细--上">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/01/23/setTimeout和setInterval那些事儿/" title="下一篇: setTimeout和setInterval那些事儿">
+            <a href="/2017/02/18/测试一下你的javascript底细--上/" title="下一篇: 测试一下你的javascript底细--上">
                 <i class="fa fa-angle-right"></i>
             </a>
         
