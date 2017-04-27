@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>字符串中出现次数最多的字符 | 张文宝的博客空间</title>
+  <title>测试一下你的javascript底细--中 | 张文宝的博客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+  <meta name="description" content="看到贤心大神写的一篇文章，﻿考验你的JavaScript底细 ，其中有十四个题目，今天写下此篇文章主要是对其中涉及到的知识点梳理一下，也算是提升自己对javascript的理解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串中出现次数最多的字符">
-<meta property="og:url" content="http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/index.html">
+<meta property="og:title" content="测试一下你的javascript底细--中">
+<meta property="og:url" content="http://zhangwenbao.top/2017/02/22/测试一下你的javascript底细--中/index.html">
 <meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
-<meta property="og:updated_time" content="2017-02-09T12:23:05.778Z">
+<meta property="og:description" content="看到贤心大神写的一篇文章，﻿考验你的JavaScript底细 ，其中有十四个题目，今天写下此篇文章主要是对其中涉及到的知识点梳理一下，也算是提升自己对javascript的理解">
+<meta property="og:updated_time" content="2017-02-22T09:40:31.056Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串中出现次数最多的字符">
-<meta name="twitter:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+<meta name="twitter:title" content="测试一下你的javascript底细--中">
+<meta name="twitter:description" content="看到贤心大神写的一篇文章，﻿考验你的JavaScript底细 ，其中有十四个题目，今天写下此篇文章主要是对其中涉及到的知识点梳理一下，也算是提升自己对javascript的理解">
   
   
     <link rel="icon" href="/img/v.jpg">
@@ -179,11 +179,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-字符串中出现次数最多的字符" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-测试一下你的javascript底细--中" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/07/字符串中出现次数最多的字符/" class="article-date">
-      <time datetime="2017-02-07T06:12:47.896Z" itemprop="datePublished">2017-02-07</time>
+      <a href="/2017/02/22/测试一下你的javascript底细--中/" class="article-date">
+      <time datetime="2017-02-22T08:44:05.995Z" itemprop="datePublished">2017-02-22</time>
 </a>
     </div>
   
@@ -196,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      字符串中出现次数最多的字符
+      测试一下你的javascript底细--中
     </h1>
   
 
@@ -217,19 +217,25 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符。咋一看，也是很简单的啊，于是写出如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.prototype.appearMaxTimes = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        index = <span class="literal">null</span>,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++ )&#123;</div><div class="line">        num[<span class="keyword">this</span>.charAt(i)] ? ++num[<span class="keyword">this</span>.charAt(i)] : num[<span class="keyword">this</span>.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            maxNum = num[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">index</span>: index,</div><div class="line">        <span class="attr">maxNum</span>: maxNum</div><div class="line">    &#125;;</div><div class="line">&#125;;		</div><div class="line"><span class="keyword">var</span> str = <span class="string">"jaajfkakgakgbajdjvbd"</span>;</div><div class="line"><span class="built_in">console</span>.log( str.appearMaxTimes() );  <span class="comment">// 打印结果为  &#123;index: "a", maxNum: 5&#125;</span></div></pre></td></tr></table></figure>
-<p>但是这样会有一些问题：</p>
-<ul>
-<li>判断的内容不是字符串呢？</li>
-<li>字符串是空的呢？</li>
-<li>出现最多的字符如果不止一个呢？</li>
-</ul>
-<p>当然如果判断的内容一定是非空字符串，而且出现最多的字符只会有一个，那固然很好，但是我们在学习阶段，还是要多思考研究一下。</p>
-<p>如果判断的内容不是字符串，那么会报错appearMaxTimes is not a funciton , 我们的方法是挂载在原型上面的，由于不能确定是否为字符串，应该修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        num = &#123;&#125;,</div><div class="line">        resultNum = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] &gt; maxNum ? maxNum = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] === maxNum ? resultNum[i] = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure></p>
-<p>总算是写完了，但是在判断出现最多次数字符的时候有多个for循环，这样是否影响效率呢，有没有其它的写法呢？思考许久，写得如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        resultNum = &#123;&#125;,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            resultNum = &#123;&#125;;</div><div class="line">            maxNum = resultNum[i] = num[i];</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num[i] === maxNum)&#123;</div><div class="line">            resultNum[i] = num[i];</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure>
-<p>总结：纵使前端框架如此之多，也一定要多学习原生javascript，其重要性不必多言。love coding love you。</p>
+        <p>看到贤心大神写的一篇文章，﻿考验你的JavaScript底细 ，其中有十四个题目，今天写下此篇文章主要是对其中涉及到的知识点梳理一下，也算是提升自己对javascript的理解，<a href="http://sentsin.com/jsquiz.html" target="_blank" rel="external">原地址</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一题</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> <span class="built_in">arguments</span>;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>MDN中对arguments有一句介绍：arguments 是一个类似数组的对象, 对应于传递给函数的参数。所以返回的结果应该是 object ,我们平时会用Array.prototype.slice.call( arguments )将其转变为真正的数组,或者使用es6的写法Array.from( arguments )。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第二题</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>)</span>&#123; </div><div class="line">    <span class="keyword">return</span> <span class="number">23</span>; </div><div class="line">&#125;;</div><div class="line"><span class="keyword">typeof</span> g();</div></pre></td></tr></table></figure>
+<p>我在<a href="http://zhangwenbao.top/2017/02/18/%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B%E4%BD%A0%E7%9A%84javascript%E5%BA%95%E7%BB%86--%E4%B8%8A/">《测试一下你的javascript底细–上》</a>中有解释，主要就是g的调用，除了在函数定义时使用，其它任何地方都会报错Uncaught ReferenceError。而且我也简述了Uncaught ReferenceError和Type Error的区别。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第三题</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">    <span class="keyword">delete</span> x;</div><div class="line">    <span class="keyword">return</span> x;</div><div class="line">&#125;)(<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>MDN中定义 delete 操作符用来删除一个对象的属性。语法是 delete expression，如果 expression 的计算结果不是一个对象的属性引用，那么，delete不会起任何作用。所以返回的结果是1。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第四题</span></div><div class="line"><span class="keyword">var</span> y = <span class="number">1</span>, x = y = <span class="keyword">typeof</span> x;</div><div class="line">x;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 修改后的代码</span></div><div class="line"><span class="keyword">var</span> y,x;</div><div class="line">y = <span class="number">1</span>;</div><div class="line">y = <span class="keyword">typeof</span> x;</div><div class="line">x = y;</div></pre></td></tr></table></figure>
+<p>这里的知识点是赋值的顺序，赋值顺序从右向左,所以x,y的值都是undefined，代码可以简化如上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第五题</span></div><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">f</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> f();</div><div class="line">&#125;)(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 修改后的代码</span></div><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"> </span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;());</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>根据填充VO(Variable Object)的顺序: 函数的形参 -&gt; 函数申明 -&gt; 变量申明。所以return typeof f()中的f就是传递过来的函数，返回值是1,其typeof类型返回是number。本质执行的代码如上 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第六题</span></div><div class="line"><span class="keyword">var</span> foo = &#123;</div><div class="line">    <span class="attr">bar</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.baz; </div><div class="line">    &#125;,</div><div class="line">    <span class="attr">baz</span>: <span class="number">1</span></div><div class="line">&#125;;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> <span class="built_in">arguments</span>[<span class="number">0</span>]();</div><div class="line">&#125;)(foo.bar);</div></pre></td></tr></table></figure>
+<p>主要涉及的是将foo.bar作为参数传到函数中执行时this的指向发生变化而指向window,而window中没有定义变量baz,所以返回值是undefined。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -238,13 +244,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/07/字符串中出现次数最多的字符/">字符串中出现次数最多的字符</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/22/测试一下你的javascript底细--中/">测试一下你的javascript底细--中</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Z-笔墨纸砚-先生 的个人博客">Z-笔墨纸砚-先生</a></p>
-        <p><span>发布时间:</span>2017年02月07日 - 14时12分</p>
-        <p><span>最后更新:</span>2017年02月09日 - 20时23分</p>
+        <p><span>发布时间:</span>2017年02月22日 - 16时44分</p>
+        <p><span>最后更新:</span>2017年02月22日 - 17时40分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/07/字符串中出现次数最多的字符/" title="字符串中出现次数最多的字符">http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/22/测试一下你的javascript底细--中/" title="测试一下你的javascript底细--中">http://zhangwenbao.top/2017/02/22/测试一下你的javascript底细--中/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/22/测试一下你的javascript底细--中/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -257,18 +263,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/18/测试一下你的javascript底细--上/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/01/项目开发中遇到的问题以及解决方法1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          测试一下你的javascript底细--上
+          项目开发中遇到的问题以及解决方法1
         
       </div>
     </a>
   
   
-    <a href="/2017/01/23/setTimeout和setInterval那些事儿/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">setTimeout和setInterval那些事儿</div>
+    <a href="/2017/02/22/node批量修改文件名/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nodejs批量修改文件名</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -346,13 +352,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/18/测试一下你的javascript底细--上/" title="上一篇: 测试一下你的javascript底细--上">
+            <a href="/2017/04/01/项目开发中遇到的问题以及解决方法1/" title="上一篇: 项目开发中遇到的问题以及解决方法1">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/01/23/setTimeout和setInterval那些事儿/" title="下一篇: setTimeout和setInterval那些事儿">
+            <a href="/2017/02/22/node批量修改文件名/" title="下一篇: nodejs批量修改文件名">
                 <i class="fa fa-angle-right"></i>
             </a>
         

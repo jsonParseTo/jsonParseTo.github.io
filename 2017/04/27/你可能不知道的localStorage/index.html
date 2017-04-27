@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>字符串中出现次数最多的字符 | 张文宝的博客空间</title>
+  <title>你可能不知道的localStorage | 张文宝的博客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+  <meta name="description" content="最近在项目中用到了localStorage,于是仔细研究了一番，发现不少有趣的东西">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串中出现次数最多的字符">
-<meta property="og:url" content="http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/index.html">
+<meta property="og:title" content="你可能不知道的localStorage">
+<meta property="og:url" content="http://zhangwenbao.top/2017/04/27/你可能不知道的localStorage/index.html">
 <meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
-<meta property="og:updated_time" content="2017-02-09T12:23:05.778Z">
+<meta property="og:description" content="最近在项目中用到了localStorage,于是仔细研究了一番，发现不少有趣的东西">
+<meta property="og:image" content="http://zhangwenbao.top/img/2017/4/1.png">
+<meta property="og:image" content="http://zhangwenbao.top/img/2017/4/2.png">
+<meta property="og:updated_time" content="2017-04-27T08:51:25.879Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串中出现次数最多的字符">
-<meta name="twitter:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+<meta name="twitter:title" content="你可能不知道的localStorage">
+<meta name="twitter:description" content="最近在项目中用到了localStorage,于是仔细研究了一番，发现不少有趣的东西">
+<meta name="twitter:image" content="http://zhangwenbao.top/img/2017/4/1.png">
   
   
     <link rel="icon" href="/img/v.jpg">
@@ -179,11 +182,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-字符串中出现次数最多的字符" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-你可能不知道的localStorage" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/07/字符串中出现次数最多的字符/" class="article-date">
-      <time datetime="2017-02-07T06:12:47.896Z" itemprop="datePublished">2017-02-07</time>
+      <a href="/2017/04/27/你可能不知道的localStorage/" class="article-date">
+      <time datetime="2017-04-27T03:38:47.438Z" itemprop="datePublished">2017-04-27</time>
 </a>
     </div>
   
@@ -196,7 +199,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      字符串中出现次数最多的字符
+      你可能不知道的localStorage
     </h1>
   
 
@@ -217,19 +220,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符。咋一看，也是很简单的啊，于是写出如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.prototype.appearMaxTimes = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        index = <span class="literal">null</span>,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++ )&#123;</div><div class="line">        num[<span class="keyword">this</span>.charAt(i)] ? ++num[<span class="keyword">this</span>.charAt(i)] : num[<span class="keyword">this</span>.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            maxNum = num[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">index</span>: index,</div><div class="line">        <span class="attr">maxNum</span>: maxNum</div><div class="line">    &#125;;</div><div class="line">&#125;;		</div><div class="line"><span class="keyword">var</span> str = <span class="string">"jaajfkakgakgbajdjvbd"</span>;</div><div class="line"><span class="built_in">console</span>.log( str.appearMaxTimes() );  <span class="comment">// 打印结果为  &#123;index: "a", maxNum: 5&#125;</span></div></pre></td></tr></table></figure>
-<p>但是这样会有一些问题：</p>
-<ul>
-<li>判断的内容不是字符串呢？</li>
-<li>字符串是空的呢？</li>
-<li>出现最多的字符如果不止一个呢？</li>
-</ul>
-<p>当然如果判断的内容一定是非空字符串，而且出现最多的字符只会有一个，那固然很好，但是我们在学习阶段，还是要多思考研究一下。</p>
-<p>如果判断的内容不是字符串，那么会报错appearMaxTimes is not a funciton , 我们的方法是挂载在原型上面的，由于不能确定是否为字符串，应该修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        num = &#123;&#125;,</div><div class="line">        resultNum = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] &gt; maxNum ? maxNum = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] === maxNum ? resultNum[i] = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure></p>
-<p>总算是写完了，但是在判断出现最多次数字符的时候有多个for循环，这样是否影响效率呢，有没有其它的写法呢？思考许久，写得如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        resultNum = &#123;&#125;,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            resultNum = &#123;&#125;;</div><div class="line">            maxNum = resultNum[i] = num[i];</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num[i] === maxNum)&#123;</div><div class="line">            resultNum[i] = num[i];</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure>
-<p>总结：纵使前端框架如此之多，也一定要多学习原生javascript，其重要性不必多言。love coding love you。</p>
+        <p>基于js的同源（同协议，同域名，同端口）策略，localstorage是无法跨域的，也无法让子域名继承父域名的localstorage数据，localStorage存储没有对XSS攻击有任何防御机制，一旦出现XSS漏洞，那么存储在localStorage里的数据就极易被获取到。MDN上介绍说：当浏览器进入隐私浏览模式，会创建一个新的、临时的数据库来存储local storage的数据；当关闭隐私浏览模式时，该数据库将被清空并丢弃。localStorage可用的空间大约都是5MB。    </p>
+<p>localStorage存储的是字符串类型的内容，如果是复杂类型的变量，localStorage会使用toString()方法将其转成字符串进行存储，（如果需要存储的内容是复杂类型的变量，需先用JSON.stringify()将其转为字符串进行存储）例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [ <span class="string">"ls"</span>, <span class="string">"l"</span>, <span class="string">"s"</span>, <span class="string">"k"</span>, <span class="string">"j"</span>, <span class="string">"p"</span>, <span class="string">"o"</span> ];</div><div class="line"><span class="keyword">var</span> t = &#123;<span class="attr">name</span>: <span class="string">"lx"</span>, <span class="attr">a</span>: [ <span class="number">1</span>, <span class="number">2</span>, <span class="string">"ls"</span> ]&#125;;</div><div class="line">localStorage.setItem(<span class="string">"arr"</span>,arr);   <span class="comment">//实际存储的内容是"ls,l,s,k,j,p,o"</span></div><div class="line">localStorage.setItem(<span class="string">"t"</span>,t);    <span class="comment">//实际存储的内容是"[object Object]"</span></div></pre></td></tr></table></figure></p>
+<p>localStorage有一个storage事件，当存储的数据发生变化时都会触发它，但是它不同于click类的事件会冒泡和能取消，storage改变的时候，触发这个事件会调用所有同域下其他窗口的storage事件，不过它本身触发storage即当前窗口是不会触发这个事件的，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//a.html页面的js代码(两个文件处于同源)</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="string">"l"</span>,<span class="string">"u"</span>,<span class="string">"c"</span>,<span class="string">"i"</span>,<span class="string">"a"</span>,<span class="string">"x"</span>,<span class="string">"b"</span>];</div><div class="line">localStorage.setItem(<span class="string">"key"</span>, <span class="string">"z"</span>);</div><div class="line">setInterval( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> t = ~~(<span class="built_in">Math</span>.random()*<span class="number">7</span>);</div><div class="line">	localStorage.setItem(<span class="string">"key"</span>, arr[t]);</div><div class="line">&#125;, <span class="number">2000</span> );</div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"storage"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime());</div><div class="line">&#125;, <span class="literal">false</span>);</div><div class="line"><span class="comment">//b.html页面的js代码</span></div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"storage"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime());</div><div class="line">    <span class="built_in">console</span>.log(e.oldValue, e.newValue,e.key, e.url);</div><div class="line">&#125;, <span class="literal">false</span>);</div><div class="line"><span class="comment">//定时器每隔2S会改变localStorage的值，但是a.html的storage事件是不会执行的，只有非当前窗口的storage事件才会执行。</span></div></pre></td></tr></table></figure></p>
+<p>在windows下，以chrome为例，localStorage是保存在C:\Documents and Settings\User Name\Local Settings\Application Data\Google\Chrome\User Data\Default\Local Storage (其中User Name是指当前的用户名)下的；虽然后缀名是.localstorege 但是实际上就是sqlite的数据库文件，可以用sqlite打开，并看到其中的数据。（可以使用firefox的SQLite Manager附加组件打开）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">"ls"</span>,<span class="string">"l"</span>,<span class="string">"s"</span>,<span class="string">"k"</span>,<span class="string">"j"</span>,<span class="string">"p"</span>,<span class="string">"o"</span>];</div><div class="line"><span class="keyword">var</span> t = &#123;<span class="attr">name</span>: <span class="string">"lx"</span>,<span class="attr">a</span>: [<span class="number">1</span>,<span class="number">2</span>, <span class="string">"ls"</span>]&#125;;</div><div class="line">localStorage.setItem(<span class="string">"l"</span>, <span class="string">"文字"</span>);</div><div class="line">localStorage.setItem(<span class="string">"u"</span>,arr);</div><div class="line">localStorage.setItem(<span class="string">"c"</span>,<span class="built_in">JSON</span>.stringify(arr));</div><div class="line">localStorage.setItem(<span class="string">"i"</span>,t);</div><div class="line">localStorage.setItem(<span class="string">"a"</span>,<span class="built_in">JSON</span>.stringify(t));</div></pre></td></tr></table></figure></p>
+<p>在chrome浏览器中看到的内容是如下：</p>
+<p><img src="/img/2017/4/1.png">ooNoIndent00</p>
+<p>通过firefox的SQLite Manager附加组件打开时，（点击Browser &amp; Search左边的Structure可以看到存储的key是text类型，value是blob类型）实际存储在数据库中的内容是转换后的ascii值，如下：</p>
+<p><img src="/img/2017/4/2.png">ooNoIndent00</p>
+<p>可以看到，对于复杂类型的存储，通过JSON.stringify()转换之后在数据库中只能看到其类型是blob,看不到其对应的ascii值。localStorage.getItem(“l”)实际存储的值是”文字”，但我们在数据库中看到的ascii值是8765 575B ,通过ascii对照表得知”文字”的ascii值是6587 5B57,即在sqlite中是以两个字节来存储一个字符的，并且低位在前高位在后。</p>
+<p>总结：研究js总能得到意外的收获，继续努力。love coding love you。</p>
 
       
     </div>
@@ -238,13 +238,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/07/字符串中出现次数最多的字符/">字符串中出现次数最多的字符</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/27/你可能不知道的localStorage/">你可能不知道的localStorage</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Z-笔墨纸砚-先生 的个人博客">Z-笔墨纸砚-先生</a></p>
-        <p><span>发布时间:</span>2017年02月07日 - 14时12分</p>
-        <p><span>最后更新:</span>2017年02月09日 - 20时23分</p>
+        <p><span>发布时间:</span>2017年04月27日 - 11时38分</p>
+        <p><span>最后更新:</span>2017年04月27日 - 16时51分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/07/字符串中出现次数最多的字符/" title="字符串中出现次数最多的字符">http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/27/你可能不知道的localStorage/" title="你可能不知道的localStorage">http://zhangwenbao.top/2017/04/27/你可能不知道的localStorage/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/04/27/你可能不知道的localStorage/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -257,18 +257,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/18/测试一下你的javascript底细--上/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          测试一下你的javascript底细--上
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/23/setTimeout和setInterval那些事儿/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">setTimeout和setInterval那些事儿</div>
+    <a href="/2017/04/15/百度地图相关/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">百度地图相关问题</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -346,13 +337,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/18/测试一下你的javascript底细--上/" title="上一篇: 测试一下你的javascript底细--上">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/01/23/setTimeout和setInterval那些事儿/" title="下一篇: setTimeout和setInterval那些事儿">
+            <a href="/2017/04/15/百度地图相关/" title="下一篇: 百度地图相关问题">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>字符串中出现次数最多的字符 | 张文宝的博客空间</title>
+  <title>百度地图相关问题 | 张文宝的博客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+  <meta name="description" content="最近开发中遇到了一些与地图相关的服务，踩了一些坑，了解了一些以前不清楚的知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串中出现次数最多的字符">
-<meta property="og:url" content="http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/index.html">
+<meta property="og:title" content="百度地图相关问题">
+<meta property="og:url" content="http://zhangwenbao.top/2017/04/15/百度地图相关/index.html">
 <meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
-<meta property="og:updated_time" content="2017-02-09T12:23:05.778Z">
+<meta property="og:description" content="最近开发中遇到了一些与地图相关的服务，踩了一些坑，了解了一些以前不清楚的知识">
+<meta property="og:updated_time" content="2017-04-17T00:47:16.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串中出现次数最多的字符">
-<meta name="twitter:description" content="最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符">
+<meta name="twitter:title" content="百度地图相关问题">
+<meta name="twitter:description" content="最近开发中遇到了一些与地图相关的服务，踩了一些坑，了解了一些以前不清楚的知识">
   
   
     <link rel="icon" href="/img/v.jpg">
@@ -179,11 +179,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-字符串中出现次数最多的字符" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-百度地图相关" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/07/字符串中出现次数最多的字符/" class="article-date">
-      <time datetime="2017-02-07T06:12:47.896Z" itemprop="datePublished">2017-02-07</time>
+      <a href="/2017/04/15/百度地图相关/" class="article-date">
+      <time datetime="2017-04-15T03:03:35.780Z" itemprop="datePublished">2017-04-15</time>
 </a>
     </div>
   
@@ -196,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      字符串中出现次数最多的字符
+      百度地图相关问题
     </h1>
   
 
@@ -207,7 +207,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/百度地图/">百度地图</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -217,19 +217,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近想提升一下原生js的能力，所以开始写一个简单的题目，比如最近碰到的一个问题，如何从字符串中取出出现次数最多的字符。咋一看，也是很简单的啊，于是写出如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.prototype.appearMaxTimes = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        index = <span class="literal">null</span>,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="keyword">this</span>.length; i &lt; len; i++ )&#123;</div><div class="line">        num[<span class="keyword">this</span>.charAt(i)] ? ++num[<span class="keyword">this</span>.charAt(i)] : num[<span class="keyword">this</span>.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            maxNum = num[i];</div><div class="line">            index = i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">index</span>: index,</div><div class="line">        <span class="attr">maxNum</span>: maxNum</div><div class="line">    &#125;;</div><div class="line">&#125;;		</div><div class="line"><span class="keyword">var</span> str = <span class="string">"jaajfkakgakgbajdjvbd"</span>;</div><div class="line"><span class="built_in">console</span>.log( str.appearMaxTimes() );  <span class="comment">// 打印结果为  &#123;index: "a", maxNum: 5&#125;</span></div></pre></td></tr></table></figure>
-<p>但是这样会有一些问题：</p>
+        <p>最近开发中遇到了一些与地图相关的服务，踩了一些坑，了解了一些以前不清楚的知识。首先介绍一下三种坐标系</p>
 <ul>
-<li>判断的内容不是字符串呢？</li>
-<li>字符串是空的呢？</li>
-<li>出现最多的字符如果不止一个呢？</li>
+<li>WGS84坐标系：即地球坐标系，为一种大地坐标系，也是目前广泛使用的GPS全球卫星定位系统使用的坐标系。</li>
+<li>GCJ02坐标系：即火星坐标系，是由中国国家测绘局制订的地理信息系统的坐标系统。由WGS84坐标系经加密后的坐标系。</li>
+<li>BD09坐标系：即百度坐标系，为百度坐标系，在GCJ02坐标系基础上再次加密。其中bd09ll表示百度经纬度坐标，bd09mc表示百度墨卡托米制坐标</li>
 </ul>
-<p>当然如果判断的内容一定是非空字符串，而且出现最多的字符只会有一个，那固然很好，但是我们在学习阶段，还是要多思考研究一下。</p>
-<p>如果判断的内容不是字符串，那么会报错appearMaxTimes is not a funciton , 我们的方法是挂载在原型上面的，由于不能确定是否为字符串，应该修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        num = &#123;&#125;,</div><div class="line">        resultNum = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] &gt; maxNum ? maxNum = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        num[i] === maxNum ? resultNum[i] = num[i]:<span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure></p>
-<p>总算是写完了，但是在判断出现最多次数字符的时候有多个for循环，这样是否影响效率呢，有没有其它的写法呢？思考许久，写得如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appearMaxTimes</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> maxNum = <span class="number">0</span>,</div><div class="line">        resultNum = &#123;&#125;,</div><div class="line">        num = &#123;&#125;;</div><div class="line">    <span class="keyword">if</span>( (<span class="built_in">Object</span>.prototype.toString.call(str) !== <span class="string">"[object String]"</span>)||str.length === <span class="number">0</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = str.length; i &lt; len; i++ )&#123;</div><div class="line">        num[str.charAt(i)] ? ++num[str.charAt(i)] : num[str.charAt(i)] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> num)&#123;</div><div class="line">        <span class="keyword">if</span>(num[i] &gt; maxNum)&#123;</div><div class="line">            resultNum = &#123;&#125;;</div><div class="line">            maxNum = resultNum[i] = num[i];</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num[i] === maxNum)&#123;</div><div class="line">            resultNum[i] = num[i];</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultNum;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> str = <span class="string">"aanajbbbsd"</span>;</div><div class="line"><span class="built_in">console</span>.log(appearMaxTimes(str) );  <span class="comment">// 打印结果为  &#123;a: 3, b: 3&#125;</span></div></pre></td></tr></table></figure>
-<p>总结：纵使前端框架如此之多，也一定要多学习原生javascript，其重要性不必多言。love coding love you。</p>
+<p>飞行器传回的坐标是WGS84坐标。app端使用的是高德地图（GCJ02坐标系），PC端使用的是百度地图（BD09坐标系）。所以在做任何与地图有关的操作时都必须转换坐标，否则会有很大的偏差。值得注意的是坐标转换服务每日请求次数上限为10万次，每次最多支持100个坐标点的转换。百度地图提供的api只支持WGS84坐标转为BD09坐标系且批量转换不能超过。而且此过程不可逆，所以我找了一个<a href="https://github.com/googollee/eviltransform/blob/master/javascript" target="_blank" rel="external">开源的算法</a>将BD09坐标转为WGS84坐标然后再保存到数据库中。</p>
 
       
     </div>
@@ -238,13 +232,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/07/字符串中出现次数最多的字符/">字符串中出现次数最多的字符</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/15/百度地图相关/">百度地图相关问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Z-笔墨纸砚-先生 的个人博客">Z-笔墨纸砚-先生</a></p>
-        <p><span>发布时间:</span>2017年02月07日 - 14时12分</p>
-        <p><span>最后更新:</span>2017年02月09日 - 20时23分</p>
+        <p><span>发布时间:</span>2017年04月15日 - 11时03分</p>
+        <p><span>最后更新:</span>2017年04月17日 - 08时47分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/07/字符串中出现次数最多的字符/" title="字符串中出现次数最多的字符">http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/02/07/字符串中出现次数最多的字符/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/15/百度地图相关/" title="百度地图相关问题">http://zhangwenbao.top/2017/04/15/百度地图相关/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/04/15/百度地图相关/　　作者: Z-笔墨纸砚-先生" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -257,18 +251,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/18/测试一下你的javascript底细--上/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/27/你可能不知道的localStorage/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          测试一下你的javascript底细--上
+          你可能不知道的localStorage
         
       </div>
     </a>
   
   
-    <a href="/2017/01/23/setTimeout和setInterval那些事儿/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">setTimeout和setInterval那些事儿</div>
+    <a href="/2017/04/01/项目开发中遇到的问题以及解决方法1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">项目开发中遇到的问题以及解决方法1</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -346,13 +340,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/18/测试一下你的javascript底细--上/" title="上一篇: 测试一下你的javascript底细--上">
+            <a href="/2017/04/27/你可能不知道的localStorage/" title="上一篇: 你可能不知道的localStorage">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/01/23/setTimeout和setInterval那些事儿/" title="下一篇: setTimeout和setInterval那些事儿">
+            <a href="/2017/04/01/项目开发中遇到的问题以及解决方法1/" title="下一篇: 项目开发中遇到的问题以及解决方法1">
                 <i class="fa fa-angle-right"></i>
             </a>
         
