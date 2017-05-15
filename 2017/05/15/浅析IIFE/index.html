@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>setTimeout和setInterval那些事儿 | 张文宝的博客空间</title>
+  <title>浅析IIFE | 张文宝的博客空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="setTimeout（执行一次） 和 setInterval（反复执行）函数经常被用来做网页上的定时器，允许为它指定一个毫秒数作为间隔执行的时间。当被启动的程序需要在非常短的时间内运行，我们就会给她指定一个很小的时间数">
+  <meta name="description" content="IIFE（Immediately Invoked Function Expression）即立即执行函数表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="setTimeout和setInterval那些事儿">
-<meta property="og:url" content="http://zhangwenbao.top/2017/01/23/setTimeout和setInterval那些事儿/index.html">
+<meta property="og:title" content="浅析IIFE">
+<meta property="og:url" content="http://zhangwenbao.top/2017/05/15/浅析IIFE/index.html">
 <meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="setTimeout（执行一次） 和 setInterval（反复执行）函数经常被用来做网页上的定时器，允许为它指定一个毫秒数作为间隔执行的时间。当被启动的程序需要在非常短的时间内运行，我们就会给她指定一个很小的时间数">
-<meta property="og:updated_time" content="2017-02-18T02:30:22.547Z">
+<meta property="og:description" content="IIFE（Immediately Invoked Function Expression）即立即执行函数表达式">
+<meta property="og:updated_time" content="2017-05-15T05:21:00.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="setTimeout和setInterval那些事儿">
-<meta name="twitter:description" content="setTimeout（执行一次） 和 setInterval（反复执行）函数经常被用来做网页上的定时器，允许为它指定一个毫秒数作为间隔执行的时间。当被启动的程序需要在非常短的时间内运行，我们就会给她指定一个很小的时间数">
+<meta name="twitter:title" content="浅析IIFE">
+<meta name="twitter:description" content="IIFE（Immediately Invoked Function Expression）即立即执行函数表达式">
   
   
     <link rel="icon" href="/img/v.jpg">
@@ -179,11 +179,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-setTimeout和setInterval那些事儿" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-浅析IIFE" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/23/setTimeout和setInterval那些事儿/" class="article-date">
-      <time datetime="2017-01-23T05:37:06.895Z" itemprop="datePublished">2017-01-23</time>
+      <a href="/2017/05/15/浅析IIFE/" class="article-date">
+      <time datetime="2017-05-15T02:56:21.822Z" itemprop="datePublished">2017-05-15</time>
 </a>
     </div>
   
@@ -196,7 +196,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      setTimeout和setInterval那些事儿
+      浅析IIFE
     </h1>
   
 
@@ -217,16 +217,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>setTimeout（执行一次） 和 setInterval（反复执行）函数经常被用来做网页上的定时器，允许为它指定一个毫秒数作为间隔执行的时间。当被启动的程序需要在非常短的时间内运行，我们就会给她指定一个很小的时间数，或者需要马上执行的话，我们甚至把这个毫秒数设置为0，但事实上，setTimeout有一个最小执行时间，当指定的时间小于该时间时，浏览器会用最小允许的时间作为setTimeout的时间间隔，也就是说即使我们把setTimeout的毫秒数设置为0，被调用的程序也没有马上启动。 </p>
-<p>这个最小的时间间隔是多少呢？这和浏览器及操作系统有关。在John Resig的新书《Javascript忍者的秘密》一书中提到  Browsers all have a 10ms minimum delay on OSX and a(approximately) 15ms delay on Windows.（在苹果上的最小时间间隔是10毫秒，在Windows系统上的最小时间间隔大约是15毫秒） </p>
-<p>另外，MDN中关于setTimeout的介绍中也提到，Firefox中定义的最小时间间隔（DOM_MIN_TIMEOUT_VALUE）是10毫秒，HTML5定义的最小时间间隔是4毫秒。既然规范都是这样写的，那看来使用setTimeout是没办法再把这个最小时间间隔缩短了。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">"lx"</span>);          </div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"lxbb"</span>);</div><div class="line">&#125;, <span class="number">0</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"bb"</span>);  </div><div class="line"><span class="comment">//打印结果依次是 lx, bb, lxbb</span></div></pre></td></tr></table></figure>
-<p>setTimeout的第一个参数是执行的函数，第二个参数是延迟的时间，后续的参数可以传递给第一个执行的函数作为参数使用（需要注意的是，IE9 及更早的 IE 浏览器不支持这种向延迟函数传递额外参数的功能），比如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">args</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i&lt; len; i++ )&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">setTimeout( args, <span class="number">1000</span>, <span class="string">"lx"</span>, <span class="string">"bb"</span>, <span class="string">"lxbb"</span> );</div><div class="line"><span class="comment">//依次打印 lx, bb, lxbb</span></div></pre></td></tr></table></figure>
-<p>有时需要向延迟执行函数中传递参数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n, t, s </span>)</span>&#123;</div><div class="line">    <span class="comment">//code </span></div><div class="line">&#125;</div><div class="line"><span class="comment">//使用匿名函数(推荐)</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    fn(<span class="string">"args1"</span>, <span class="string">"args2"</span>, <span class="string">"args3"</span>);</div><div class="line">&#125;, <span class="number">1000</span>);	</div><div class="line"><span class="comment">// 绝对不要使用字符串作为第一个参数</span></div><div class="line"><span class="comment">// 因为它的本质是调用了eval()函数</span></div><div class="line">setTimeout(<span class="string">"fn('args1', 'args2', 'args3')"</span>, <span class="number">1000</span>);</div><div class="line"><span class="comment">//等价于如下代码</span></div><div class="line">setTimeout(<span class="built_in">eval</span>( <span class="string">"fn('args1', 'args2', 'args3')"</span> ), <span class="number">1000</span>);</div></pre></td></tr></table></figure>
-<p>由于javascript是基于<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop" target="_blank" rel="external">Event Loop</a>机制的单线程模型的语言，基于JavaScript引擎的计时策略，以及本质上的单线程运行方式，所以其它代码的运行可能会阻塞此线程。因此没法确保函数会在 setTimeout 指定的时刻被调用。上述代码在执行console.log(“lx”)的时候会直接打印lx，然后遇到setTimeout函数时将其callback添加到事件队列中并在设定的延迟时间后执行（如果此时的线程是空闲的话）。所以接下来会执行console.log(“bb”)打印出bb，最后打印的值是lxbb。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"lx"</span>);</div><div class="line">	&#125;, <span class="number">900</span>);</div><div class="line">&#125;,<span class="number">0</span>);</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"bb"</span>);</div><div class="line">&#125;,<span class="number">1000</span>);    <span class="comment">//这段代码的执行结果很奇怪,有时打印 lx, bb  有时打印  bb, lx</span></div></pre></td></tr></table></figure>
+        <p>IIFE（Immediately Invoked Function Expression）即立即执行函数表达式，从字面量来解释就是定义一个函数然后立即执行它，常用的写法有以下两种：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//code</span></div><div class="line">&#125;());</div><div class="line"><span class="comment">//或者</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//code	</span></div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>如果代码修改如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//code</span></div><div class="line">&#125;(); <span class="comment">// SyntaxError: Unexpected token (</span></div></pre></td></tr></table></figure></p>
+<p>代码会报错，因为代码在执行时遇到关键词function，会默认将其当做一个函数声明，而不是函数表达式，但是函数声明需要一个函数名，而上面的代码是没有函数名的，如果没有把它显视地表达成函数表达式，就会报错，报错位置是紧跟在function后面的（。</p>
+<p>给function增加一个函数名，再次修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//code</span></div><div class="line">&#125;(); <span class="comment">// SyntaxError: Unexpected token )</span></div></pre></td></tr></table></figure></p>
+<p>代码又报错了，在一个表达式后面加上括号，表示该表达式立即执行；而如果是在一个语句后面加上括号，该括号和之前的语句没有任何关系，而只是一个分组操作符，用来控制运算中的优先级（小括号里的先运算）。所以以上代码等价于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//code</span></div><div class="line">&#125;</div><div class="line">(); <span class="comment">// SyntaxError: Unexpected token )</span></div></pre></td></tr></table></figure></p>
+<p>相当于先声明了一个函数，然后进行()内的表达式运算，但是()内的表达式不能为空，所以报错，报错位置是()表达式后面的)。</p>
+<p>再次修改代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//code</span></div><div class="line">&#125;(<span class="number">1</span>);</div></pre></td></tr></table></figure></p>
+<p>显然这次就没有报错了，相当于先声明了一个函数fn，然后执行表达式(1),虽然这么写没什么意义，但在语法上面是完全正确的，所以对于函数表达式的写法（js引擎在遇到=时会把后面的函数当做是表达式而不是函数声明），如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">100</span>;</div><div class="line">&#125;();  <span class="comment">//写法正确，所以fn的值为100，</span></div></pre></td></tr></table></figure></p>
+<p>对于文章开头的两种写法，由于在javascript里，括号内部不能包含语句，当解析器对代码进行解释的时候，先碰到了()，然后碰到function关键字就会自动将()里面的代码识别为函数表达式而不是函数声明。只要我们将函数以表达式的形式显示，那么直接在后面添加()就可以立即执行了。所以写法有很多，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;()); </span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;)(); </span></div><div class="line"><span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">100</span>;</div><div class="line">&#125;();</div><div class="line"><span class="literal">true</span> &amp;&amp; <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;();</span></div><div class="line"><span class="number">0</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;();</span></div><div class="line"><span class="comment">//如果不关注函数的返回值，也可以这么写</span></div><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;();</span></div><div class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;();</span></div><div class="line">-<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;();</span></div><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//code &#125;();</span></div></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -234,13 +235,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/01/23/setTimeout和setInterval那些事儿/">setTimeout和setInterval那些事儿</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/15/浅析IIFE/">浅析IIFE</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 张文宝 的个人博客">张文宝</a></p>
-        <p><span>发布时间:</span>2017年01月23日 - 13时37分</p>
-        <p><span>最后更新:</span>2017年02月18日 - 10时30分</p>
+        <p><span>发布时间:</span>2017年05月15日 - 10时56分</p>
+        <p><span>最后更新:</span>2017年05月15日 - 13时21分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/01/23/setTimeout和setInterval那些事儿/" title="setTimeout和setInterval那些事儿">http://zhangwenbao.top/2017/01/23/setTimeout和setInterval那些事儿/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/01/23/setTimeout和setInterval那些事儿/　　作者: 张文宝" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/15/浅析IIFE/" title="浅析IIFE">http://zhangwenbao.top/2017/05/15/浅析IIFE/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangwenbao.top/2017/05/15/浅析IIFE/　　作者: 张文宝" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -253,18 +254,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/02/07/字符串中出现次数最多的字符/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          字符串中出现次数最多的字符
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/19/微信限制访问外链或者跳转的问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">IOS从微信跳转到APP Store的困扰</div>
+    <a href="/2017/04/27/你可能不知道的localStorage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你可能不知道的localStorage</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -342,13 +334,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/07/字符串中出现次数最多的字符/" title="上一篇: 字符串中出现次数最多的字符">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/01/19/微信限制访问外链或者跳转的问题/" title="下一篇: IOS从微信跳转到APP Store的困扰">
+            <a href="/2017/04/27/你可能不知道的localStorage/" title="下一篇: 你可能不知道的localStorage">
                 <i class="fa fa-angle-right"></i>
             </a>
         
