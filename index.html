@@ -1,90 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>张文宝的博客空间</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="张文宝的博客,记录web学习的知识">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="张文宝的博客空间">
-    <meta property="og:url" content="http://zhangwenbao.top/index.html">
-    <meta property="og:site_name" content="张文宝的博客空间">
-    <meta property="og:description" content="张文宝的博客,记录web学习的知识">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="张文宝的博客空间">
-    <meta name="twitter:description" content="张文宝的博客,记录web学习的知识"><style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        #canvas {
-            display: block;
-            width: 700px;
-            height: 400px;
-            margin: 0 auto;
-        }
-    </style>
+<meta charset="utf-8">
+<title>张文宝的博客空间</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="张文宝的博客,记录web学习的知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="张文宝的博客空间">
+<meta property="og:url" content="http://zhangwenbao.top/index.html">
+<meta property="og:site_name" content="张文宝的博客空间">
+<meta property="og:description" content="张文宝的博客,记录web学习的知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="张文宝的博客空间">
+<meta name="twitter:description" content="张文宝的博客,记录web学习的知识">
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    #canvas {
+        display: block;
+        width: 1000px;
+        height: 600px;
+        margin: 0 auto;
+    }
+</style>
 </head>
 <body>
     <div id="main"></div>
-    <canvas id="canvas" width="700" height="400" style="background-color: #eee;"></canvas>
-    <script>
-        var canvas = document.getElementById('canvas'),
-            ctx = canvas.getContext('2d'),
-            circle = [],       
-            colors = ["green", "blue", "red", "yellow", "magenta", "orange", "brown", "purple", "pink"];
-            random = function (start, end) {
-                var res = end - start + 1;
-                return Math.floor( Math.random()*res ) + start;
-            }
-        class Circle {
-            constructor (x = 100, y = 100, r = 10, c) {
-                this.x = x
-                this.y = y
-                this.r = r
-                this.c = c
-                this.isSelect = false
-            }
+<canvas id="canvas" width="1000" height="600" style="background-color: #eee;"></canvas>
+<script>
+    var canvas = document.getElementById('canvas'),
+        ctx = canvas.getContext('2d'),
+        circle = [],       
+        colors = ["green", "blue", "red", "yellow", "magenta", "orange", "brown", "purple", "pink"];
+        random = function (start, end) {
+            var res = end - start + 1;
+            return Math.floor( Math.random()*res ) + start;
         }
-        for (var i = 0; i < 20; i++) {
-            var color = colors[random(0, colors.length)]
-            var res = new Circle( random(50, 650), random(50, 350), random(10, 50), color )
-            circle.push(res)
+    class Circle {
+        constructor (x = 100, y = 100, r = 10, c) {
+            this.x = x
+            this.y = y
+            this.r = r
+            this.c = c
+            this.isSelect = false
         }
-        var drawCircle = function () {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-            for (var i = 0, len = circle.length; i < len; i++) {
-                ctx.beginPath()
-                ctx.fillStyle = circle[i].c
-                ctx.globalAlpha = .7
-                ctx.arc( circle[i].x, circle[i].y, circle[i].r, 0, 2*Math.PI )
-                if (circle[i].isSelect) {                    
-                    ctx.lineWidth=4
-                } else {                   
-                    ctx.lineWidth=1
-                }
-                ctx.fill()
-                ctx.stroke()
+    }
+    for (var i = 0; i < 30; i++) {
+        var color = `rgb(${random(0, 255)},${random(0, 255)}, ${random(0, 255)})`
+        var res = new Circle( random(80, 920), random(80, 520), random(10, 80), color )
+        circle.push(res)
+    }
+    var drawText = function (t, x, y) {
+        console.log(t, x, y)
+        ctx.font = '16px Airal'
+        ctx.textBaseline = 'bottom'
+        ctx.fillStyle = '#000'
+        ctx.fillText(t, x, y)
+    }
+    var drawCircle = function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        for (var i = 0, len = circle.length; i < len; i++) {
+            ctx.beginPath()
+            ctx.fillStyle = circle[i].c
+            ctx.globalAlpha = .7
+            ctx.arc( circle[i].x, circle[i].y, circle[i].r, 0, 2*Math.PI )
+            if (circle[i].isSelect) {                    
+                ctx.lineWidth=4
+            } else {                   
+                ctx.lineWidth=1
+            }
+            ctx.fill()
+            ctx.stroke()
+        }
+    }
+    drawCircle()
+    var current = null
+    canvas.addEventListener('mousemove', function (e) {
+        if (current) {
+            current.isSelect = false
+            current = null
+        }
+        for (var i = circle.length - 1; i >= 0; i--) {
+            if ( Math.sqrt((e.offsetX-circle[i].x)*(e.offsetX-circle[i].x) + (e.offsetY-circle[i].y)*(e.offsetY-circle[i].y)) < circle[i].r) {
+                current = circle[i]
+                circle[i].isSelect = true 
+                break;
+            } else {
+                circle[i].isSelect = false
             }
         }
         drawCircle()
-        var current = null
-        canvas.addEventListener('mousemove', function (e) {
-            if (current) {
-                current.isSelect = false
-                current = null
-            }
-            for (var i = circle.length - 1; i >= 0; i--) {
-                if ( Math.sqrt((e.offsetX-circle[i].x)*(e.offsetX-circle[i].x) + (e.offsetY-circle[i].y)*(e.offsetY-circle[i].y)) < circle[i].r) {
-                    current = circle[i]
-                    circle[i].isSelect = true
-                    break;
-                } else {
-                    circle[i].isSelect = false
-                }
-            }
-            drawCircle()
-        })
-    </script>
+        if (current) {
+            
+                drawText('颜色是: ' + current.c, e.offsetX, e.offsetY )
+        }
+    })
+</script>
 </body>
 </html>
