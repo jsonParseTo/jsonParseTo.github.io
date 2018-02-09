@@ -12,9 +12,79 @@
     <meta property="og:description" content="张文宝的博客,记录web学习的知识">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="张文宝的博客空间">
-    <meta name="twitter:description" content="张文宝的博客,记录web学习的知识">
+    <meta name="twitter:description" content="张文宝的博客,记录web学习的知识"><style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #canvas {
+            display: block;
+            width: 700px;
+            height: 400px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias et sit eius quo eligendi, quam atque doloribus non labore possimus odit ab magnam soluta ipsum veritatis fuga? Dolorum, maiores velit!
+    <div id="main"></div>
+    <canvas id="canvas" width="700" height="400" style="background-color: #eee;"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            circle = [],       
+            colors = ["green", "blue", "red", "yellow", "magenta", "orange", "brown", "purple", "pink"];
+            random = function (start, end) {
+                var res = end - start + 1;
+                return Math.floor( Math.random()*res ) + start;
+            }
+        class Circle {
+            constructor (x = 100, y = 100, r = 10, c) {
+                this.x = x
+                this.y = y
+                this.r = r
+                this.c = c
+                this.isSelect = false
+            }
+        }
+        for (var i = 0; i < 20; i++) {
+            var color = colors[random(0, colors.length)]
+            var res = new Circle( random(50, 650), random(50, 350), random(10, 50), color )
+            circle.push(res)
+        }
+        var drawCircle = function () {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            for (var i = 0, len = circle.length; i < len; i++) {
+                ctx.beginPath()
+                ctx.fillStyle = circle[i].c
+                ctx.globalAlpha = .7
+                ctx.arc( circle[i].x, circle[i].y, circle[i].r, 0, 2*Math.PI )
+                if (circle[i].isSelect) {                    
+                    ctx.lineWidth=4
+                } else {                   
+                    ctx.lineWidth=1
+                }
+                ctx.fill()
+                ctx.stroke()
+            }
+        }
+        drawCircle()
+        var current = null
+        canvas.addEventListener('mousemove', function (e) {
+            if (current) {
+                current.isSelect = false
+                current = null
+            }
+            for (var i = circle.length - 1; i >= 0; i--) {
+                if ( Math.sqrt((e.offsetX-circle[i].x)*(e.offsetX-circle[i].x) + (e.offsetY-circle[i].y)*(e.offsetY-circle[i].y)) < circle[i].r) {
+                    current = circle[i]
+                    circle[i].isSelect = true
+                    break;
+                } else {
+                    circle[i].isSelect = false
+                }
+            }
+            drawCircle()
+        })
+    </script>
 </body>
 </html>
