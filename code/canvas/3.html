@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>hangge.com</title>
+
+    <style>
+        canvas {
+            cursor: pointer;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            x = 200,
+            y = 200,
+            r = 30,
+            i = 0,
+            random = function (start, end) {
+                var res = end - start + 1;
+                return Math.floor(Math.random() * res) + start;
+            }
+        strokeArc = function () {
+            ctx.beginPath()
+            ctx.strokeStyle = 'rgb(165, 222, 241)'
+            ctx.arc(200, 200, 80, 0, 2 * Math.PI)
+            ctx.stroke()
+        }
+        ctx.font = '30px Arial'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.lineWidth = 8
+        strokeArc()
+        ctx.fillText('0%', 200, 200)
+
+        var start;
+        ctx.strokeStyle = 'rgb(68, 153, 255)'
+
+        function animate(time) {
+            var progress
+            if (!start) {
+                start = time
+            }
+            progress = time - start
+            console.log('animate', time, start, progress)
+            i = i + random(1, 5)
+            if (i < 360) {
+                id = requestAnimationFrame(animate)
+            } else {
+                i = 360
+            }
+            console.log(i)
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            strokeArc()
+            ctx.strokeStyle = 'rgb(68, 153, 255)'
+            ctx.beginPath()
+            ctx.arc(200, 200, 80, -90 / 180 * Math.PI, (-90 + i) / 180 * Math.PI)
+            ctx.fillText(`${(i/360*100).toFixed(0)}%`, 200, 200)
+            ctx.stroke()
+        }
+        var id = requestAnimationFrame(animate)
+        canvas.addEventListener('mouseover', () => {
+            console.log('mover')
+            cancelAnimationFrame(id)
+        })
+    </script>
+</body>
+
+</html>
