@@ -13,6 +13,19 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张文宝的博客空间">
 <meta name="twitter:description" content="张文宝的博客,记录web学习的知识">
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    #canvas {
+        display: block;
+        width: 1600px;
+        height: 900px;
+        margin: 0 auto;
+        background-color:#eee
+    }
+</style>
 </head>
 <body>
     <dl>
@@ -20,6 +33,45 @@
         <dd><a href="code/canvas/1.html">1.canvas绘制环绕的圆</a></dd>
         <dd><a href="code/canvas/2.html">2.canvas实现随机圆</a></dd>
         <dd><a href="code/canvas/3.html">2.canvas实现圆形进度条</a></dd>
-    </dl>
+    </dl><canvas id="canvas" width="1600" height="900"></canvas>
+    <script>
+        const CENTER_CIRCLE_X = 300, 
+              CENTER_CIRCLE_Y = 300, 
+              CENTER_CIRCLE_R = 20,
+              AROUND_CIRCLE_X = 300,
+              AROUND_CIRCLE_Y = 200,
+              AROUND_CIRCLE_R = 10,
+              AROUND_CIRCLE_NUM = 8;
+        let flag = 0,
+            canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            drawCircle = (x, y, r, angle) => {
+                ctx.save()
+                ctx.rotate(angle)
+                ctx.beginPath()
+                ctx.arc(x, y, r, 0, 2*Math.PI, false)
+                ctx.stroke()
+                ctx.restore()
+            },
+            angleToRadian = angle => angle * Math.PI / 180,
+            draw = () => {   
+                ctx.beginPath()       
+                ctx.save()
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.arc(CENTER_CIRCLE_X, CENTER_CIRCLE_Y, CENTER_CIRCLE_R, 0, 2*Math.PI, false)
+                ctx.fill()  
+    
+                ctx.translate(CENTER_CIRCLE_X, CENTER_CIRCLE_Y)
+                var deg = 360 / AROUND_CIRCLE_NUM
+                for (var i = 0; i < AROUND_CIRCLE_NUM; i++) {
+                    drawCircle(0, AROUND_CIRCLE_Y - CENTER_CIRCLE_Y, AROUND_CIRCLE_R, angleToRadian(deg*i+flag))
+                }
+                flag = flag >= 360 ? 0 : (flag*10 + 30)/10;
+                console.log(flag)
+                ctx.restore()
+                requestAnimationFrame(draw)           
+            }
+        requestAnimationFrame(draw)
+    </script>
 </body>
 </html>
