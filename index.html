@@ -18,12 +18,15 @@
         padding: 0;
         margin: 0;
     }
+    dl {
+        position: relative;
+        z-index: 5;
+    }
     #canvas {
+        position: absolute;
+        top: 0;
         display: block;
-        width: 1600px;
-        height: 900px;
-        margin: 0 auto;
-        background-color:#eee
+        background-color: bisque
     }
 </style>
 </head>
@@ -33,45 +36,63 @@
         <dd><a href="code/canvas/1.html">1.canvas绘制环绕的圆</a></dd>
         <dd><a href="code/canvas/2.html">2.canvas实现随机圆</a></dd>
         <dd><a href="code/canvas/3.html">2.canvas实现圆形进度条</a></dd>
-    </dl><canvas id="canvas" width="1600" height="900"></canvas>
+    </dl>
+    <canvas id="canvas"></canvas>
     <script>
-        const CENTER_CIRCLE_X = 300, 
-              CENTER_CIRCLE_Y = 300, 
-              CENTER_CIRCLE_R = 20,
-              AROUND_CIRCLE_X = 300,
-              AROUND_CIRCLE_Y = 200,
-              AROUND_CIRCLE_R = 10,
-              AROUND_CIRCLE_NUM = 8;
-        let flag = 0,
-            canvas = document.getElementById('canvas'),
+        let canvas = document.getElementById('canvas'),
             ctx = canvas.getContext('2d'),
-            drawCircle = (x, y, r, angle) => {
-                ctx.save()
-                ctx.rotate(angle)
-                ctx.beginPath()
-                ctx.arc(x, y, r, 0, 2*Math.PI, false)
-                ctx.stroke()
-                ctx.restore()
-            },
-            angleToRadian = angle => angle * Math.PI / 180,
-            draw = () => {   
-                ctx.beginPath()       
-                ctx.save()
-                ctx.clearRect(0, 0, canvas.width, canvas.height)
-                ctx.arc(CENTER_CIRCLE_X, CENTER_CIRCLE_Y, CENTER_CIRCLE_R, 0, 2*Math.PI, false)
-                ctx.fill()  
-    
-                ctx.translate(CENTER_CIRCLE_X, CENTER_CIRCLE_Y)
-                var deg = 360 / AROUND_CIRCLE_NUM
-                for (var i = 0; i < AROUND_CIRCLE_NUM; i++) {
-                    drawCircle(0, AROUND_CIRCLE_Y - CENTER_CIRCLE_Y, AROUND_CIRCLE_R, angleToRadian(deg*i+flag))
-                }
-                flag = flag >= 360 ? 0 : (flag*10 + 30)/10;
-                console.log(flag)
-                ctx.restore()
-                requestAnimationFrame(draw)           
+            width = canvas.width = window.innerWidth,
+            height = canvas.height = window.innerHeight,
+            nodeList = [],
+            colors = ['#f7acbc', '#ef4e22', '#4261b3', '#5c7a29', '#1d953f', '411445', '#00a6ac', '#ffe600', '#281f1d', '#c99979']
+        class Circle {
+            constructor (x = 100, y = 100, move_step_x = 2, move_step_y = 2, radius = 25, color = '#f00') {
+                this.x = x
+                this.y = y
+                this.move_step_x = move_step_x
+                this.move_step_y = move_step_y
+                this.radius = radius
+                this.color = color
             }
-        requestAnimationFrame(draw)
+            draw () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            move () {
+                this.draw();
+                if (this.y + this.move_step_y > canvas.height - this.radius || this.y + this.move_step_y < this.radius) {
+                    this.move_step_y = -this.move_step_y;
+                }
+                if (this.x + this.move_step_x > canvas.width - this.radius || this.x + this.move_step_x < this.radius) {
+                    this.move_step_x = -this.move_step_x;
+                }
+                this.x += this.move_step_x;
+                this.y += this.move_step_y;
+            }
+        }
+        let random = (start, end) => {
+            var random = Math.floor(Math.random()*(end - start + 1) + start)
+            while (random === 0) {
+                random = Math.floor(Math.random()*(end - start + 1) + start)
+            }
+            return random
+        }
+        for (var i = 0; i < 300; i++) {
+            let circle = new Circle(random(0, width), random(0, height), random(-2, 2), random(-2, 2), random(4, 12), colors[random(0, colors.length - 1)])
+            nodeList.push(circle)
+        }
+        var filter = nodeList.filter(val => val.move_step_x === 0 || val.move_step_y === 0)
+        console.log(filter)
+        function init () {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            nodeList.forEach(value => {
+                value.move()
+            })
+            requestAnimationFrame(init)
+        }
+        requestAnimationFrame(init)
     </script>
 </body>
 </html>
