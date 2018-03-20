@@ -18,25 +18,57 @@
         padding: 0;
         margin: 0;
     }
-    dl {
-        position: relative;
+    html, 
+    body, 
+    .content {
+        height: 100%;
+        min-height: 100%;
+    }
+    .content {
+        width: 1300px;
+        margin: 30px auto;
+    }
+    h6 {
+        font-size: 20px;
+        color: #222;
+    }
+    ul {
+        display: flex;
         z-index: 5;
     }
+    li {
+        width: 200px;
+        padding: 3px 0; 
+        border: solid 1px #ccc;
+        margin: 10px;
+        font-size: 16px;
+        list-style: none;
+        text-align: center;
+    }
+    li a {
+        color: #555;
+        text-decoration: none;
+    }
     #canvas {
-        position: absolute;
+        position: fixed;
         top: 0;
+        z-index: -1;
         display: block;
-        background-color: bisque
+        background-color: #efefef
     }
 </style>
 </head>
 <body>
-    <dl>
-        <dt>canvas</dt>
-        <dd><a href="code/canvas/1.html">1.canvas绘制环绕的圆</a></dd>
-        <dd><a href="code/canvas/2.html">2.canvas实现随机圆</a></dd>
-        <dd><a href="code/canvas/3.html">2.canvas实现圆形进度条</a></dd>
-    </dl>
+    <div class="content">
+        <aside>
+            <h6>canvas</h6>
+            <ul>
+                <li><a href="code/canvas/1.html">1.canvas绘制环绕的圆</a></li>
+                <li><a href="code/canvas/2.html">2.canvas实现随机圆</a></li>
+                <li><a href="code/canvas/3.html">3.canvas实现圆形进度条</a></li>
+            </ul>
+        </aside>
+    </div>
     <canvas id="canvas"></canvas>
     <script>
         let canvas = document.getElementById('canvas'),
@@ -46,11 +78,11 @@
             nodeList = [],
             colors = ['#f7acbc', '#ef4e22', '#4261b3', '#5c7a29', '#1d953f', '411445', '#00a6ac', '#ffe600', '#281f1d', '#c99979']
         class Circle {
-            constructor (x = 100, y = 100, move_step_x = 2, move_step_y = 2, radius = 25, color = '#f00') {
+            constructor (x, y, move_step_x, move_step_y, radius, color) {
                 this.x = x
                 this.y = y
-                this.move_step_x = move_step_x
-                this.move_step_y = move_step_y
+                this.move_step_x = move_step_x/10
+                this.move_step_y = move_step_y/10
                 this.radius = radius
                 this.color = color
             }
@@ -62,14 +94,14 @@
             }
             move () {
                 this.draw();
-                if (this.y + this.move_step_y > canvas.height - this.radius || this.y + this.move_step_y < this.radius) {
+                if ((this.y*10 + this.move_step_y*10)/10 > canvas.height - this.radius || (this.y*10 + this.move_step_y*10)/10 < this.radius) {
                     this.move_step_y = -this.move_step_y;
                 }
-                if (this.x + this.move_step_x > canvas.width - this.radius || this.x + this.move_step_x < this.radius) {
+                if ((this.x*10 + this.move_step_x*10)/10 > canvas.width - this.radius || (this.x*10 + this.move_step_x*10)/10< this.radius) {
                     this.move_step_x = -this.move_step_x;
                 }
-                this.x += this.move_step_x;
-                this.y += this.move_step_y;
+                this.x = (this.x*10 + 10*this.move_step_x)/10;
+                this.y = (this.y*10 + 10*this.move_step_y)/10;
             }
         }
         let random = (start, end) => {
@@ -80,11 +112,9 @@
             return random
         }
         for (var i = 0; i < 300; i++) {
-            let circle = new Circle(random(0, width), random(0, height), random(-2, 2), random(-2, 2), random(4, 12), colors[random(0, colors.length - 1)])
+            let circle = new Circle(random(0, width), random(0, height), random(-5, 5), random(-5, 5), random(4, 12), colors[random(0, colors.length - 1)])
             nodeList.push(circle)
         }
-        var filter = nodeList.filter(val => val.move_step_x === 0 || val.move_step_y === 0)
-        console.log(filter)
         function init () {
             ctx.clearRect(0,0, canvas.width, canvas.height);
             nodeList.forEach(value => {
