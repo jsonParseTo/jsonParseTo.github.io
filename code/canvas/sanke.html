@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {padding: 0; margin: 0;}
+        #canvas {display: block;margin: 50px auto 0;}
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+        let canvas = document.querySelector('#canvas'),
+            c = canvas.getContext('2d');
+        c.fillStyle = '#000';
+        c.fillRect(0, 0, canvas.width, canvas.height)
+        for (var i = 0, len = canvas.height; i < len; i=i+5) {
+            c.beginPath();
+            c.strokeStyle = '#ef4e22';
+            c.moveTo(0, i);
+            c.lineTo(canvas.width, i);
+            c.stroke();
+        }
+        function k (e) {
+            switch (e.keyCode) {
+                case 37: 
+                    console.log('左');
+                    break;
+                case 38: 
+                    console.log('上');
+                    break;
+                case 39: 
+                    console.log('下');
+                    break;
+                case 40: 
+                    console.log('右');
+                    break;
+
+            }
+        }
+        document.addEventListener('keydown', k)
+        
+    </script>
+</body>
+</html>
