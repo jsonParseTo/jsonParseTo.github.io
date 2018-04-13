@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>弹幕效果</title>
+    <style>
+        * {
+            padding: 0; 
+            margin: 0;
+        }
+        .main {
+            position: relative;
+            overflow: hidden;
+            width: 500px;
+            height: 400px;
+            margin: 0 auto 30px;
+            background-color: #ccc;
+        }
+        .main p {
+            position: absolute;
+            left: 500px;
+            white-space: nowrap;
+            font-size: 20px;
+            color: #333;
+        }
+        .content {
+            text-align: center;
+        }
+        .content .words {
+            width: 250px;
+            padding: 3px 10px;
+            line-height: 30px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main"></div>
+    <div class="content">
+        <input type="text" class="words">
+        <button class="btn">Add</button>
+    </div>
+    <script>
+        let $ = node => document.querySelector(node),
+            height = parseInt( window.getComputedStyle( $('.main') ).height ) - 50,
+            createNode = value => {
+                let ele = document.createElement('p');
+                ele.innerHTML = value;
+                return ele;
+            };
+        class List {
+            constructor (w) {
+                this.top = Math.floor( Math.random() * height ) + 20;
+                this.step = Math.floor( Math.random() ) + 1; 
+                this.time = Math.floor( Math.random()*10 ) + 10; 
+                this.e = createNode(w);
+            }
+            run () {
+                $('.main').append( this.e );
+                this.e.style.top = this.top + 'px';
+                let _time = setInterval(() => {
+                    let left = parseInt(window.getComputedStyle(this.e).left)
+                    let width = parseInt(window.getComputedStyle(this.e).width)
+                    if (left + width <= 0) {
+                        this.e.remove()
+                        clearInterval(_time)
+                    }
+                    this.e.style.left =  left - this.step + 'px';
+                }, this.time)
+            }
+        }
+        $('.btn').addEventListener('click', function () {
+            let words = $('.words').value;
+            new List(words).run();
+            $('.words').value = ''
+        }, false);
+        let list = ['Hello, lucia', '这是一段话, 哈哈哈哈', 'Just, Test', '刘二狗66666', '起飞起飞 起飞起飞 起飞起飞', '猥琐发育, 别浪', '稳住, 我们能赢', 'We are a family!!!']
+        list.forEach((v) => {
+            new List(v).run();
+        })
+    </script>
+</body>
+</html>
