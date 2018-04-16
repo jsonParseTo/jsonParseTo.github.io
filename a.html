@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>张文宝的博客空间</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="张文宝的博客,记录web学习的知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="张文宝的博客空间">
+<meta property="og:url" content="http://zhangwenbao.top/index.html">
+<meta property="og:site_name" content="张文宝的博客空间">
+<meta property="og:description" content="张文宝的博客,记录web学习的知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="张文宝的博客空间">
+<meta name="twitter:description" content="张文宝的博客,记录web学习的知识">
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    html, 
+    body, 
+    .content {
+        height: 100%;
+        min-height: 100%;
+    }
+    .content {
+        width: 1300px;
+        margin: 0 auto;
+    }
+    h6 {
+        font-size: 20px;
+        color: #222;
+    }
+    ul {
+        display: flex;
+        z-index: 5;
+    }
+    li {
+        width: 200px;
+        padding: 3px 0; 
+        border: solid 1px #ccc;
+        margin: 10px;
+        font-size: 16px;
+        list-style: none;
+        text-align: center;
+    }
+    li a {
+        color: #555;
+        text-decoration: none;
+    }
+    #canvas {
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        display: block;
+        background-color: #efefef
+    }
+</style>
+</head>
+<body>
+    <div class="content">
+        <aside>
+            <h6>canvas</h6>
+            <ul>
+                <li><a href="code/canvas/1.html">1.canvas绘制环绕的圆</a></li>
+                <li><a href="code/canvas/2.html">2.canvas实现随机圆</a></li>
+                <li><a href="code/canvas/3.html">3.canvas实现圆形进度条</a></li>
+            </ul>
+        </aside>
+        <aside>
+            <h6>javascript</h6>
+            <ul>
+                <li><a href="code/js/20180413_barrage.html">弹幕效果</a></li>
+            </ul>
+        </aside>
+    </div>
+    <canvas id="canvas"></canvas>
+    <audio src="star_sky.mp3" autoplay="autoplay" loop="loop"></audio>
+    <script>
+        let canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            width = canvas.width = window.innerWidth,
+            height = canvas.height = window.innerHeight,
+            nodeList = [],
+            colors = ['#f7acbc', '#ef4e22', '#4261b3', '#5c7a29', '#1d953f', '411445', '#00a6ac', '#ffe600', '#281f1d', '#c99979']
+        ctx.globalAlpha = 0.5
+        class Circle {
+            constructor (x, y, move_step_x, move_step_y, radius, color) {
+                this.x = x
+                this.y = y
+                this.move_step_x = move_step_x/10
+                this.move_step_y = move_step_y/10
+                this.radius = radius
+                this.color = color
+            }
+            draw () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            move () {
+                this.draw();
+                if ((this.y*10 + this.move_step_y*10)/10 > canvas.height - this.radius || (this.y*10 + this.move_step_y*10)/10 < this.radius) {
+                    this.move_step_y = -this.move_step_y;
+                }
+                if ((this.x*10 + this.move_step_x*10)/10 > canvas.width - this.radius || (this.x*10 + this.move_step_x*10)/10< this.radius) {
+                    this.move_step_x = -this.move_step_x;
+                }
+                this.x = (this.x*10 + 10*this.move_step_x)/10;
+                this.y = (this.y*10 + 10*this.move_step_y)/10;
+            }
+        }
+        let random = (start, end) => {
+            var random = Math.floor(Math.random()*(end - start + 1) + start)
+            while (random === 0) {
+                random = Math.floor(Math.random()*(end - start + 1) + start)
+            }
+            return random
+        }
+        for (var i = 0; i < 100; i++) {
+            let circle = new Circle(random(0, width), random(0, height), random(-3, 3), random(-3, 3), random(4, 12), colors[random(0, colors.length - 1)])
+            nodeList.push(circle)
+        }
+        function init () {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            nodeList.forEach(value => {
+                value.move()
+            })
+            requestAnimationFrame(init)
+        }
+        requestAnimationFrame(init)
+    </script>
+</body>
+</html>

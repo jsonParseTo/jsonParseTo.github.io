@@ -1,83 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
+
 <head>
-<meta charset="utf-8">
-<title>张文宝的博客空间</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="张文宝的博客,记录web学习的知识">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张文宝的博客空间">
-<meta property="og:url" content="http://zhangwenbao.top/index.html">
-<meta property="og:site_name" content="张文宝的博客空间">
-<meta property="og:description" content="张文宝的博客,记录web学习的知识">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张文宝的博客空间">
-<meta name="twitter:description" content="张文宝的博客,记录web学习的知识">
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-    }
-    html, 
-    body, 
-    .content {
-        height: 100%;
-        min-height: 100%;
-    }
-    .content {
-        width: 1300px;
-        margin: 0 auto;
-    }
-    h6 {
-        font-size: 20px;
-        color: #222;
-    }
-    ul {
-        display: flex;
-        z-index: 5;
-    }
-    li {
-        width: 200px;
-        padding: 3px 0; 
-        border: solid 1px #ccc;
-        margin: 10px;
-        font-size: 16px;
-        list-style: none;
-        text-align: center;
-    }
-    li a {
-        color: #555;
-        text-decoration: none;
-    }
-    #canvas {
-        position: fixed;
-        top: 0;
-        z-index: -1;
-        display: block;
-        background-color: #efefef
-    }
-</style>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0;
+        }
+
+        body {
+            background: url("images/bg.jpg");
+            -webkit-background-size: cover;
+            background-size: cover;
+            ;
+            overflow: hidden;
+        }
+
+        .lucia {
+            width: 235px;
+            height: 235px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            left: 0;
+            transform: translateY(-50%);
+            margin: auto;
+            perspective: 1000px;
+            /*视距*/
+        }
+
+        .lucia .scene {
+            transform-style: preserve-3D;
+            /*子元素为3d模式*/
+            width: 240px;
+            height: 240px;
+            transform-origin: 50%;
+            /* 设置旋转的中心点*/
+            float: left;
+            margin-right: 60px;
+            -webkit-animation: slide 18s linear infinite;
+            animation: slide 18s linear infinite;
+        }
+        .lucia .scene ul li {
+            list-style: none;
+            width: 135px;
+            height: 235px;
+            border: 5px solid #FE98D9;
+            position: absolute;
+        }
+
+        .lucia .scene ul li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lucia .scene ul li:nth-child(1) {
+            transform: rotateY(0deg) translateZ(260px);
+        }
+        .lucia .scene ul li:nth-child(2) {
+            transform: rotateY(60deg) translateZ(260px);
+        }
+
+        .lucia .scene ul li:nth-child(3) {
+            transform: rotateY(120deg) translateZ(260px);
+        }
+
+        .lucia .scene ul li:nth-child(4) {
+            transform: rotateY(180deg) translateZ(260px);
+        }
+
+        .lucia .scene ul li:nth-child(5) {
+            transform: rotateY(240deg) translateZ(260px);
+        }
+
+        .lucia .scene ul li:nth-child(6) {
+            transform: rotateY(300deg) translateZ(260px);
+        }
+        @keyframes slide {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+        .lucia .scene:hover {
+            -webkit-animation-play-state: paused;
+            animation-play-state: paused;
+        }
+        .lucia .scene li:hover img {
+            transform: scale(1.2);
+            border: 5px solid rgba(255, 255, 255, 0.5)
+        }
+        audio {
+            display: none;
+        }
+        #canvas {
+            position: fixed;
+            top: 0;
+            z-index: -1;
+            display: block;
+            background-color: #efefef
+        }
+    </style>
 </head>
+
 <body>
-    <div class="content">
-        <aside>
-            <h6>canvas</h6>
+    <div class="lucia">
+        <audio src="mp3/love_you.mp3" autoplay controls loop="loop">
+        </audio>
+        <div class="scene">
             <ul>
-                <li><a href="code/canvas/1.html">1.canvas绘制环绕的圆</a></li>
-                <li><a href="code/canvas/2.html">2.canvas实现随机圆</a></li>
-                <li><a href="code/canvas/3.html">3.canvas实现圆形进度条</a></li>
+                <li>
+                    <img src="image/5.jpg" alt="">
+                </li>
+                <li>
+                    <img src="image/1.jpg" alt="">
+                </li>
+                <li>
+                    <img src="image/3.jpg" alt="">
+                </li>
+                <li>
+                    <img src="image/4.jpg" alt="">
+                </li>
+                <li>
+                    <img src="image/2.png" alt="">
+                </li>
+                <li>
+                    <img src="image/7.jpg" alt="">
+                </li>
             </ul>
-        </aside>
-        <aside>
-            <h6>javascript</h6>
-            <ul>
-                <li><a href="code/js/20180413_barrage.html">弹幕效果</a></li>
-            </ul>
-        </aside>
+        </div>
     </div>
     <canvas id="canvas"></canvas>
-    <audio src="star_sky.mp3" autoplay="autoplay" loop="loop"></audio>
-    <script>
+</body>
+<script>
         let canvas = document.getElementById('canvas'),
             ctx = canvas.getContext('2d'),
             width = canvas.width = window.innerWidth,
@@ -119,7 +177,7 @@
             }
             return random
         }
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 200; i++) {
             let circle = new Circle(random(0, width), random(0, height), random(-3, 3), random(-3, 3), random(4, 12), colors[random(0, colors.length - 1)])
             nodeList.push(circle)
         }
@@ -132,5 +190,4 @@
         }
         requestAnimationFrame(init)
     </script>
-</body>
 </html>
